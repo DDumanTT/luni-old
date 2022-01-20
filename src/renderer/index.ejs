@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>LUNI - Unified Game Launcher</title>
+  </head>
+  <body>
+    <div id="root" class="bg-slate-200 dark:bg-slate-800 dark:text-white"></div>
+  </body>
+  <script>
+    let theme = window.electron.store.get('theme');
+    document.documentElement.className = theme;
+
+    window.electron.ipcRenderer.once('ipc-example', (arg) => {
+      // eslint-disable-next-line no-console
+      console.log(arg);
+    });
+
+    window.electron.ipcRenderer.myPing();
+  </script>
+</html>
