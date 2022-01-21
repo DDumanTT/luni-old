@@ -12,13 +12,14 @@ export default function Main() {
   // };
 
   return (
-    <div className="flex-grow">
-      {/* <button type="button" onClick={(e) => clickHandler(e, 'dark')}>
-        dark
-      </button>
-      <button type="button" onClick={(e) => clickHandler(e, 'light')}>
-        light
-      </button> */}
+    <div id="" className="flex-grow overflow-y-auto scroll">
+      <div className="grid grid-cols-5 gap-2 m-2">
+        <div className="border h-52 w-full"> </div>
+        <div className="border h-52 w-full"> </div>
+        <div className="border h-52 w-full"> </div>
+        <div className="border h-52 w-full"> </div>
+        <div className="border h-52 w-full"> </div>
+      </div>
     </div>
   );
 }

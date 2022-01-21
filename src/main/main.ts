@@ -11,40 +11,38 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
-import Store from 'electron-store';
-import sqlite from 'sqlite3';
+import './events';
+import './store';
+// import sqlite from 'sqlite3';
 
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-import schema from './config_schema';
-
-const store = new Store({ schema });
 
 // Configure sqlite database
-const sqlite3 = sqlite.verbose();
-const db = new sqlite3.Database(app.getPath('userData'));
+// const sqlite3 = sqlite.verbose();
+// const db = new sqlite3.Database(app.getPath('userData'));
 
-console.log('LULE');
-console.log(app.getPath('userData'));
+// console.log('LULE');
+// console.log(app.getPath('userData'));
 
-db.serialize(() => {
-  db.run('CREATE TABLE lorem (info TEXT)');
+// db.serialize(() => {
+//   db.run('CREATE TABLE lorem (info TEXT)');
 
-  const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-  for (let i = 0; i < 10; i += 1) {
-    stmt.run(`Ipsum ${i}`);
-  }
-  stmt.finalize();
+//   const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
+//   for (let i = 0; i < 10; i += 1) {
+//     stmt.run(`Ipsum ${i}`);
+//   }
+//   stmt.finalize();
 
-  db.each('SELECT rowid AS id, info FROM lorem', (_err, row) => {
-    console.log(`${row.id}: ${row.info}`);
-  });
-});
+//   db.each('SELECT rowid AS id, info FROM lorem', (_err, row) => {
+//     console.log(`${row.id}: ${row.info}`);
+//   });
+// });
 
-db.close();
+// db.close();
 
 export default class AppUpdater {
   constructor() {
@@ -55,12 +53,6 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
-
-ipcMain.on('ipc-example', async (event, arg) => {
-  const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-  console.log(msgTemplate(arg));
-  event.reply('ipc-example', msgTemplate('pong'));
-});
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -109,6 +101,8 @@ const createWindow = async () => {
       preload: path.join(__dirname, 'preload.js'),
     },
     backgroundColor: '#333642',
+    frame: false,
+    titleBarOverlay: true,
   });
 
   mainWindow.loadURL(resolveHtmlPath('index.html'));
@@ -145,14 +139,6 @@ const createWindow = async () => {
 /**
  * Add event listeners...
  */
-// Electron store
-ipcMain.on('electron-store-get', async (event, val) => {
-  event.returnValue = store.get(val);
-});
-ipcMain.on('electron-store-set', async (_, key, val) => {
-  store.set(key, val);
-});
-
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed

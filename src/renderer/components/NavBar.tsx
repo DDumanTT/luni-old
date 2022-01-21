@@ -6,9 +6,11 @@ export default function NavBar() {
   return (
     <>
       <div className="flex justify-between items-center h-16 bg-slate-850">
-        <Link to="/">
-          <div className="text-orange-400 font-bold text-4xl ml-4">LUNI</div>
-        </Link>
+        <div className="text-orange-400 font-bold text-4xl ml-4">
+          <Link to="/">
+            <span>LUNI</span>
+          </Link>
+        </div>
         <div>
           <SearchBar />
         </div>
