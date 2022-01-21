@@ -1,0 +1,61 @@
+/*           */
+/* Variables */
+/*           */
+:root {
+  --fallback-title-bar-height: 26px;
+}
+
+/*           */
+/* Title bar */
+/*           */
+#MainContent {
+  top: env(titlebar-area-height, var(--fallback-title-bar-height));
+  /* overflow-y: scroll; */
+}
+
+.draggable {
+  -webkit-app-region: drag;
+}
+
+.nonDraggable {
+  -webkit-app-region: no-drag;
+}
+
+#titleBarContainer {
+  top: env(titlebar-area-y, 0);
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+}
+
+#titleBar {
+  left: env(titlebar-area-x, 0);
+  width: env(titlebar-area-width, 100%);
+}
+
+#controlButton {
+  -webkit-app-region: no-drag;
+  height: env(titlebar-area-height, var(--fallback-title-bar-height));
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*            */
+/* Scroll bar */
+/*            */
+.scroll::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  /* border-radius: 10px; */
+  background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  @apply bg-slate-600;
+}

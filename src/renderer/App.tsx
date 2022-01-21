@@ -1,10 +1,10 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
+import './App.css';
 import 'tailwindcss/tailwind.css';
-import NavBar from './views/components/NavBar';
 
 // View imports
 import Main from './views/Main';
-// import NavBar from './views/components/NavBar';
+import NavBar from './components/NavBar';
 
 declare global {
   interface Window {
@@ -19,7 +19,10 @@ declare global {
 }
 
 const NavLayout = () => (
-  <div className="flex flex-col min-h-screen">
+  <div
+    id="MainContent"
+    className="flex flex-col absolute left-0 right-0 bottom-0 overflow-hidden"
+  >
     <NavBar />
     <Outlet />
   </div>
