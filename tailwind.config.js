@@ -9,6 +9,9 @@ module.exports = {
         slate: {
           850: '#1A2436',
         },
+        neutral: {
+          350: '#BCBCBC',
+        },
       },
     },
   },
