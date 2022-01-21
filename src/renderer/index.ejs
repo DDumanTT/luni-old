@@ -8,14 +8,15 @@
     <div id="root" class="bg-slate-200 dark:bg-slate-800 dark:text-white"></div>
   </body>
   <script>
-    let theme = window.electron.store.get('theme');
+    // console.log(window.api);
+    let theme = window.api.store.get('theme');
     document.documentElement.className = theme;
 
-    window.electron.ipcRenderer.once('ipc-example', (arg) => {
+    window.api.ipcRenderer.once('ipc-example', (arg) => {
       // eslint-disable-next-line no-console
       console.log(arg);
     });
 
-    window.electron.ipcRenderer.myPing();
+    window.api.ipcRenderer.myPing();
   </script>
 </html>
