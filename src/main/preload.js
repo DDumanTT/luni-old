@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-const test = {
+const ping = {
   myPing() {
     ipcRenderer.send('ipc-example', 'ping');
   },
@@ -35,7 +35,7 @@ const windowAction = {
 
 // eslint-disable-next-line import/prefer-default-export
 const API = {
-  test,
+  ping,
   store,
   windowAction,
 };

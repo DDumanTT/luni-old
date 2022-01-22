@@ -12,11 +12,11 @@
     let theme = window.api.store.get('theme');
     document.documentElement.className = theme;
 
-    window.api.ipcRenderer.once('ipc-example', (arg) => {
+    window.api.ping.once('ipc-example', (arg) => {
       // eslint-disable-next-line no-console
       console.log(arg);
     });
 
-    window.api.ipcRenderer.myPing();
+    window.api.ping.myPing();
   </script>
 </html>
