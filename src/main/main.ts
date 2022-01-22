@@ -16,33 +16,10 @@ import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import './events';
 import './store';
-// import sqlite from 'sqlite3';
+import './database';
 
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-
-// Configure sqlite database
-// const sqlite3 = sqlite.verbose();
-// const db = new sqlite3.Database(app.getPath('userData'));
-
-// console.log('LULE');
-// console.log(app.getPath('userData'));
-
-// db.serialize(() => {
-//   db.run('CREATE TABLE lorem (info TEXT)');
-
-//   const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
-//   for (let i = 0; i < 10; i += 1) {
-//     stmt.run(`Ipsum ${i}`);
-//   }
-//   stmt.finalize();
-
-//   db.each('SELECT rowid AS id, info FROM lorem', (_err, row) => {
-//     console.log(`${row.id}: ${row.info}`);
-//   });
-// });
-
-// db.close();
 
 export default class AppUpdater {
   constructor() {
@@ -96,6 +73,8 @@ const createWindow = async () => {
     show: false,
     width: 1024,
     height: 728,
+    minWidth: 240,
+    minHeight: 240,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
