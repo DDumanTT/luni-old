@@ -22,7 +22,7 @@ const devtoolsConfig =
       }
     : {};
 
-export default merge(baseConfig, {
+export default merge<webpack.Configuration>(baseConfig, {
   ...devtoolsConfig,
 
   mode: 'production',

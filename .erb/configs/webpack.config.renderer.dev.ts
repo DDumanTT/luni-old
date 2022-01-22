@@ -18,7 +18,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const port = process.env.PORT || 1212;
 const manifest = path.resolve(webpackPaths.dllPath, 'renderer.json');
-const requiredByDLLConfig = module.parent.filename.includes(
+const requiredByDLLConfig = module.parent!.filename.includes(
   'webpack.config.renderer.dev.dll'
 );
 
@@ -37,7 +37,11 @@ if (
   execSync('npm run postinstall');
 }
 
-export default merge(baseConfig, {
+// interface RendererDevConfig extends webpack.Configuration {
+//   devServer?;
+// }
+
+export default merge<webpack.Configuration>(baseConfig, {
   devtool: 'inline-source-map',
 
   mode: 'development',
@@ -180,6 +184,7 @@ export default merge(baseConfig, {
     __filename: false,
   },
 
+  // @ts-ignore
   devServer: {
     port,
     compress: true,
@@ -190,7 +195,6 @@ export default merge(baseConfig, {
     },
     historyApiFallback: {
       verbose: true,
-      disableDotRule: false,
     },
     onBeforeSetupMiddleware() {
       console.log('Starting Main Process...');

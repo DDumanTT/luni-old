@@ -14,7 +14,7 @@ checkNodeEnv('development');
 
 const dist = webpackPaths.dllPath;
 
-export default merge(baseConfig, {
+export default merge<webpack.Configuration>(baseConfig, {
   context: webpackPaths.rootPath,
 
   devtool: 'eval',
