@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Game {
@@ -6,5 +11,23 @@ export class Game {
   id!: number;
 
   @Column()
-  title!: string;
+  launcher!: string;
+
+  @Column()
+  name!: string;
+
+  @Column()
+  executable_path!: string;
+
+  @Column()
+  card_img_path?: string;
+
+  @Column()
+  logo_img_path?: string;
+
+  @Column()
+  hero_img_path?: string;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
 }
