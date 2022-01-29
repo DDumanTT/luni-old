@@ -80,7 +80,7 @@ const createWindow = async () => {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
-    backgroundColor: '#333642',
+    backgroundColor: '#1F2937',
     frame: false,
     titleBarOverlay: true,
   });
