@@ -1,8 +1,8 @@
 import { app } from 'electron';
 import sqlite from 'sqlite3';
 import path from 'path';
-import { createConnection } from 'typeorm';
-import { Game } from '../models/Game';
+// import { createConnection } from 'typeorm';
+// import { Game } from '../models/Game';
 
 // Configure sqlite database
 const sqlite3 = sqlite.verbose();
@@ -31,15 +31,15 @@ db;
 
 // db.close();
 
-createConnection({
-  type: 'sqlite',
-  database: dbPath,
-  synchronize: true,
-  entities: [Game],
-})
-  .then(async (connection) => {
-    let game = new Game();
-    game.title = 'GTA: lule';
-    await connection.manager.save(game);
-  })
-  .catch((err) => console.log(err));
+// createConnection({
+//   type: 'sqlite',
+//   database: dbPath,
+//   synchronize: true,
+//   entities: [Game],
+// })
+//   .then(async (connection) => {
+//     let game = new Game();
+//     game.title = 'GTA: lule';
+//     await connection.manager.save(game);
+//   })
+//   .catch((err) => console.log(err));
