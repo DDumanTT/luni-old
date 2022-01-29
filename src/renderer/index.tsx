@@ -5,8 +5,10 @@ import TitleBar from './components/TitleBar';
 
 ReactDOM.render(
   <MemoryRouter>
-    <TitleBar />
-    <App />
+    <div className="overflow-hidden">
+      <TitleBar />
+      <App />
+    </div>
   </MemoryRouter>,
   document.getElementById('root')
 );
