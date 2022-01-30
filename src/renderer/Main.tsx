@@ -1,5 +1,5 @@
 // import React from 'react';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar/NavBar';
 import HeroGame from './components/HeroGame';
 import Carousel from './components/Carousel';
 import GameCard from './components/GameCard';
@@ -16,18 +16,19 @@ export default function Main() {
   // };
 
   return (
-    <div
-      id=""
-      className="h-screen relative top-[26px] left-0 overflow-auto scroll z-0"
-      // style={{ overflow: 'overlay' }}
-    >
-      <NavBar />
-      <HeroGame />
+    <div className="h-[calc(100vh-26px)] top-[26px] overflow-x-hidden overflow-y-scroll">
+      <div className="">
+        <div className="relative left-0 z-0">
+          <NavBar />
+          <HeroGame />
+        </div>
+      </div>
       <Carousel name="Favorites">
         {[...Array(20)].map((_, i) => (
           <GameCard key={i} />
         ))}
       </Carousel>
+      <div className="h-[5000px]"></div>
     </div>
   );
 }

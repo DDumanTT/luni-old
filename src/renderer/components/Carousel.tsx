@@ -12,8 +12,20 @@ export default function Carousel(props: propTypes) {
   const [width, height] = useWindowSize();
   const animation = useAnimation();
   const x = useMotionValue(0);
+  const [cardWidth, setCardWidth] = useState(width * 0.1 + 16);
 
-  const cardWidth = width * 0.1 + 16;
+  useEffect(() => {
+    if (width < 640) {
+      setCardWidth(width * 0.25 + 16);
+    } else if (width < 768) {
+      setCardWidth(width * 0.2 + 16);
+    } else if (width < 1024) {
+      setCardWidth(width * 0.15 + 16);
+    } else {
+      setCardWidth(width * 0.1 + 16);
+    }
+    animation.start({ x: 0 }, { duration: 0 });
+  }, [width]);
 
   const childPositions = props.children.map((_, i) => {
     return -i * cardWidth;
