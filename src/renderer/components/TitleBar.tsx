@@ -18,7 +18,7 @@ export default function TitleBar() {
   return (
     <div
       id="titleBarContainer"
-      className="absolute w-full shadow bg-neutral-200 dark:bg-zinc-900"
+      className="relative w-full shadow bg-neutral-200 dark:bg-zinc-900 z-50"
     >
       <div
         id="titleBar"
