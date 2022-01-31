@@ -3,9 +3,15 @@ import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { CogIcon } from '@heroicons/react/outline';
 import useComponentVisible from 'renderer/hooks/useComponentVisible';
 
+import ThemeSwitcher from './ThemeSwitcher';
+
 const settingsVariants = {
   initial: { opacity: 0 },
-  enter: { opacity: 1, x: 16, transition: { staggerChildren: 0.05 } },
+  enter: {
+    opacity: 1,
+    x: 16,
+    transition: { delay: 0.05, staggerChildren: 0.05 },
+  },
   exit: { opacity: 0 },
 };
 
@@ -20,8 +26,6 @@ export default function SettingsButton() {
     isComponentVisible: settingsVisible,
     setIsComponentVisible: setSettingsVisible,
   } = useComponentVisible(false);
-
-  const [openedWithButton, setOpenedWithButton] = useState(false);
 
   const buttonRef = useRef(document.createElement('div'));
 
@@ -49,6 +53,9 @@ export default function SettingsButton() {
           className="my-1 px-2 py-1 hover:bg-gradient-to-r hover:from-indigo-800 hover:to-indigo-600 active:to-indigo-900 active:from-indigo-900 cursor-pointer rounded-lg"
         >
           Scan games
+        </motion.li>
+        <motion.li variants={itemsVariants} className="my-1 px-2 py-1">
+          <ThemeSwitcher />
         </motion.li>
         <motion.li
           variants={itemsVariants}
