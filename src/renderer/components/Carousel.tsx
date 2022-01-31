@@ -21,6 +21,8 @@ export default function Carousel(props: propTypes) {
       setCardWidth(width * 0.2 + 16);
     } else if (width < 1024) {
       setCardWidth(width * 0.15 + 16);
+    } else if (width < 1280) {
+      setCardWidth(width * 0.12 + 16);
     } else {
       setCardWidth(width * 0.1 + 16);
     }
