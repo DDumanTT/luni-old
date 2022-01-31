@@ -16,6 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@equal-games/game-scanner": "^1.1.0",
     "sqlite3": "^5.0.2",
     "typeorm": "^0.2.41"
   }
