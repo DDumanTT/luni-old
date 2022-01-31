@@ -1,4 +1,5 @@
 import { ipcMain, BrowserWindow } from 'electron';
+import game_scanner from '@equal-games/game-scanner';
 
 // test event
 ipcMain.on('ipc-example', async (event, arg) => {
@@ -23,4 +24,9 @@ ipcMain.on('action-minimize', async () => {
   const win = BrowserWindow.getFocusedWindow();
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   win?.isMinimized() ? win?.restore() : win?.minimize();
+});
+
+// game scanner
+ipcMain.handle('games-steam', async (e, ...args) => {
+  return game_scanner.steam.games();
 });

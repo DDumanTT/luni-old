@@ -4,6 +4,8 @@ import HeroGame from './components/HeroGame';
 import Carousel from './components/Carousel';
 import GameCard from './components/GameCard';
 
+import game_scanner from '@equal-games/game-scanner';
+
 export default function Main() {
   // const clickHandler = (
   //   event: React.MouseEvent<HTMLButtonElement>,
@@ -28,6 +30,7 @@ export default function Main() {
           <GameCard key={i} />
         ))}
       </Carousel>
+      <button>CLICK</button>
       <div className="h-[5000px]"></div>
     </div>
   );

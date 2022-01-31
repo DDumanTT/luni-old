@@ -33,11 +33,22 @@ const windowAction = {
   minimize: () => ipcRenderer.send('action-minimize'),
 };
 
+const game_scanner = {
+  games: async (channel) => {
+    const validChannels = ['games-steam', 'games-epic'];
+    if (validChannels.includes(channel)) {
+      console.log('invoke');
+      return ipcRenderer.invoke(channel);
+    }
+  },
+};
+
 // eslint-disable-next-line import/prefer-default-export
 const API = {
   ping,
   store,
   windowAction,
+  game_scanner,
 };
 
 contextBridge.exposeInMainWorld('api', API);
