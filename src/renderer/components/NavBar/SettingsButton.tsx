@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { CogIcon } from '@heroicons/react/outline';
 import useComponentVisible from 'renderer/hooks/useComponentVisible';
@@ -15,14 +15,18 @@ const itemsVariants = {
 };
 
 export default function SettingsButton() {
-  const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(true);
+  const {
+    ref: menuRef,
+    isComponentVisible: settingsVisible,
+    setIsComponentVisible: setSettingsVisible,
+  } = useComponentVisible(false);
+
+  const [openedWithButton, setOpenedWithButton] = useState(false);
 
   const buttonRef = useRef(document.createElement('div'));
 
   const settingsMenu = (
     <motion.div
-      ref={ref}
       key="settings"
       variants={settingsVariants}
       initial="initial"
@@ -59,22 +63,24 @@ export default function SettingsButton() {
 
   return (
     <LayoutGroup>
-      <motion.div
-        className="cursor-pointer rounded-full bg-zinc-700 bg-opacity-0 p-2"
-        ref={buttonRef}
-        onClick={() => {
-          setIsComponentVisible(!isComponentVisible);
-        }}
-        whileHover={{
-          backgroundColor: 'rgb(63 63 70 0.5)',
-          transition: { duration: 0.2 },
-        }}
-      >
-        <CogIcon className="h-8 w-8" />
-      </motion.div>
-      <AnimatePresence exitBeforeEnter>
-        {isComponentVisible && settingsMenu}
-      </AnimatePresence>
+      <div ref={menuRef}>
+        <motion.div
+          className="cursor-pointer rounded-full bg-zinc-700 bg-opacity-0 p-2"
+          ref={buttonRef}
+          onClick={() => {
+            setSettingsVisible(!settingsVisible);
+          }}
+          whileHover={{
+            backgroundColor: 'rgb(63 63 70 0.5)',
+            transition: { duration: 0.2 },
+          }}
+        >
+          <CogIcon className="h-8 w-8" />
+        </motion.div>
+        <AnimatePresence exitBeforeEnter>
+          {settingsVisible && settingsMenu}
+        </AnimatePresence>
+      </div>
     </LayoutGroup>
   );
 }
