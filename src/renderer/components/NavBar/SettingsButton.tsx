@@ -1,16 +1,18 @@
-import { useRef, useState } from 'react';
+import { useRef, useContext } from 'react';
 import { motion, AnimatePresence, LayoutGroup } from 'framer-motion';
 import { CogIcon } from '@heroicons/react/outline';
 import useComponentVisible from 'renderer/hooks/useComponentVisible';
 
 import ThemeSwitcher from './ThemeSwitcher';
 
+import { settingsContext } from 'renderer/providers/SettingsProvider';
+
 const settingsVariants = {
   initial: { opacity: 0 },
   enter: {
     opacity: 1,
     x: 16,
-    transition: { delay: 0.05, staggerChildren: 0.05 },
+    transition: { delay: 0.1, staggerChildren: 0.08 },
   },
   exit: { opacity: 0 },
 };
@@ -28,6 +30,7 @@ export default function SettingsButton() {
   } = useComponentVisible(false);
 
   const buttonRef = useRef(document.createElement('div'));
+  const { scanModalOpen, toggleScanModalOpen } = useContext(settingsContext);
 
   const settingsMenu = (
     <motion.div
@@ -39,7 +42,7 @@ export default function SettingsButton() {
       transition={{ duration: 0.1 }}
       className="absolute top-10 right-24"
     >
-      <ul className="w-36 px-3 py-1 bg-zinc-800 rounded-xl drop-shadow-lg">
+      <ul className="w-44 px-3 py-1 bg-zinc-800 rounded-xl drop-shadow-lg">
         <motion.li
           variants={itemsVariants}
           whileTap={{ scale: 0.98 }}
@@ -51,10 +54,18 @@ export default function SettingsButton() {
           variants={itemsVariants}
           whileTap={{ scale: 0.98 }}
           className="my-1 px-2 py-1 hover:bg-gradient-to-r hover:from-indigo-800 hover:to-indigo-600 active:to-indigo-900 active:from-indigo-900 cursor-pointer rounded-lg"
+          onClick={() => {
+            setSettingsVisible(false);
+            toggleScanModalOpen();
+          }}
         >
           Scan games
         </motion.li>
-        <motion.li variants={itemsVariants} className="my-1 px-2 py-1">
+        <motion.li
+          variants={itemsVariants}
+          className="my-1 px-2 py-1 inline-flex w-full justify-between items-center"
+        >
+          Theme
           <ThemeSwitcher />
         </motion.li>
         <motion.li
@@ -82,7 +93,9 @@ export default function SettingsButton() {
             transition: { duration: 0.2 },
           }}
         >
-          <CogIcon className="h-8 w-8" />
+          <motion.div whileTap={{ scale: 0.9 }}>
+            <CogIcon className="h-8 w-8" />
+          </motion.div>
         </motion.div>
         <AnimatePresence exitBeforeEnter>
           {settingsVisible && settingsMenu}

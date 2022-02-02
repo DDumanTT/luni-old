@@ -47,7 +47,6 @@ export default function SearchBar() {
       setShowSearch(false);
       setShowSearchInput(false);
       searchBarAnim.start('collapsed').then(() => {
-        // setSearchTerm('');
         searchBarAnim.start('rest');
       });
     } else {
@@ -85,9 +84,9 @@ export default function SearchBar() {
       onClick={showSearch ? () => {} : handleSearchOpen}
     >
       <div className="flex items-center p-2">
-        <div>
+        <motion.div whileTap={{ scale: 0.9 }}>
           <SearchIcon className="h-8 w-8" />
-        </div>
+        </motion.div>
         <motion.input
           variants={searchBarItemsVariants}
           type="text"
@@ -101,6 +100,7 @@ export default function SearchBar() {
           variants={searchBarItemsVariants}
           className={showSearch ? 'cursor-pointer' : 'hidden'}
           onClick={showSearch ? handleSearchOpen : () => {}}
+          whileTap={{ scale: 0.9 }}
         >
           <X className="h-8 w-8" />
         </motion.div>
